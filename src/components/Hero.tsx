@@ -49,6 +49,18 @@ const Hero = () => {
       >
       </motion.div>
 
+      {/* Nome Mobile - Centralizado no Meio (Apenas Retrato) */}
+      <div className="lg:hidden absolute inset-0 flex items-center justify-center z-25 pointer-events-none px-6 text-center hidden portrait:flex landscape:hidden">
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.4 }}
+          className="text-7xl font-['Caveat'] text-white drop-shadow-[0_0_20px_rgba(168,85,247,0.9)] mt-[-10vh]"
+        >
+          Helder Pinto
+        </motion.h1>
+      </div>
+
       {/* Logotipos Mobile - Apenas em modo Retrato */}
       <div className="lg:hidden absolute bottom-24 left-0 w-full flex-col items-center justify-center gap-6 z-30 pointer-events-none hidden portrait:flex landscape:hidden">
         <motion.img
