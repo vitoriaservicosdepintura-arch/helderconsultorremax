@@ -62,7 +62,7 @@ const Properties = () => {
   const [selectedProperty, setSelectedProperty] = useState<PropertyDetails | null>(null);
 
   return (
-    <section className="pt-0 lg:pt-24 pb-24 relative overflow-hidden">
+    <section className="pt-0 lg:pt-24 pb-0 lg:pb-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <h2 className="text-brand font-bold tracking-widest text-sm uppercase mb-4">Portfólio em Destaque</h2>

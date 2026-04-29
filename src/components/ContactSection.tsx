@@ -112,7 +112,7 @@ const ContactSection = () => {
     };
 
     return (
-        <section className="bg-[#0a0f1d] py-16 px-6" id="contact">
+        <section className="bg-[#0a0f1d] pt-0 lg:pt-16 pb-0 lg:pb-16 px-6" id="contact">
             <div className="container mx-auto max-w-5xl">
                 <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
                     <motion.button whileHover={{ scale: 1.05 }} onClick={handleWhatsAppClick} className="flex items-center gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-8 py-4 rounded-2xl w-full md:w-auto font-bold text-lg shadow-[0_10px_20px_rgba(37,211,102,0.2)]">

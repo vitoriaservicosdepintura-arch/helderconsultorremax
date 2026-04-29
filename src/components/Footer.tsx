@@ -16,9 +16,9 @@ const FacebookIcon = ({ className }: { className?: string }) => (
 
 const Footer = () => {
   return (
-    <footer className="relative bg-zinc-950 pt-24 pb-12 border-t border-zinc-900 overflow-hidden">
+    <footer className="relative bg-zinc-950 pt-0 lg:pt-24 pb-12 border-t border-zinc-900 overflow-hidden">
       {/* LOGO3 BACKGROUND DEGRADE NO CANTO DIREITO */}
-      <div className="absolute -right-20 bottom-0 w-[400px] lg:w-[600px] opacity-[0.03] pointer-events-none z-0 select-none">
+      <div className="absolute -right-20 bottom-20 lg:bottom-40 w-[400px] lg:w-[600px] opacity-[0.03] pointer-events-none z-0 select-none">
         <img
           src="/LOGO3-sem-fundo.png"
           alt=""

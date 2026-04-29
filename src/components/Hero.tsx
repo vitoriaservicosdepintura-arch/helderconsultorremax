@@ -113,7 +113,7 @@ const Hero = () => {
           transition={{ duration: 1.2, delay: 0.4 }}
           className="relative z-10 max-w-xl lg:max-w-2xl space-y-8"
         >
-          {/* HEADLINE (H1) - AJUSTADO PARA NÃO SOBREPOR O ROSTO NO MOBILE */}
+          {/* Headline (H1) */}
           <div className="space-y-2 lg:space-y-4">
             <h1 className="font-montserrat text-3xl sm:text-5xl lg:text-[4.5rem] font-extrabold leading-[1.1] lg:leading-[0.95] tracking-tight text-white lg:not-italic drop-shadow-2xl">
               Excelência & <br />
@@ -128,13 +128,13 @@ const Hero = () => {
               </span>
             </h1>
 
-            {/* SUBTÍTULO (H2) - RESPONSIVO E CLARO */}
+            {/* Subtítulo (H2) */}
             <h2 className="text-base sm:text-lg lg:text-xl font-medium text-white/90 leading-relaxed font-sans max-w-[95%] lg:max-w-[90%]">
               Acesso privilegiado aos imóveis mais exclusivos do mercado, para quem procura privacidade e distinção.
             </h2>
           </div>
 
-          {/* TEXTO DE APOIO REDUZIDO NO MOBILE */}
+          {/* Texto de Apoio */}
           <div className="flex gap-4 lg:gap-8 items-stretch mb-4 lg:mb-0">
             <div className="w-[3px] bg-[#FF0000] rounded-full flex-shrink-0" />
             <p className="text-sm sm:text-lg text-[#CCCCCC] font-normal leading-relaxed font-sans line-clamp-3 lg:line-clamp-none">
@@ -142,7 +142,7 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* BOTÃO CTA PREMIUM VIBRANTE - AJUSTE DE MARGEM PARA CABER NA TELA */}
+          {/* Botão CTA */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -159,7 +159,6 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* GRADIENTE DE AMBIENTE PARA PROFUNDIDADE */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#0033aa]/10 to-transparent pointer-events-none z-0" />
     </section>
   );
