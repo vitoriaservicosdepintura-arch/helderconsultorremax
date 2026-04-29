@@ -24,15 +24,23 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen flex flex-col lg:flex-row items-center justify-between overflow-hidden bg-[#000000] [perspective:1500px]"
+      className="relative w-full min-h-screen flex flex-col lg:flex-row items-center justify-between overflow-hidden bg-[#000000] [perspective:1200px]"
     >
-      {/* COLUNA ESQUERDA - FOTO DE PERFIL (PROFISSIONAL & 4K) */}
+      {/* 
+        ORGANIZAÇÃO DE CAMADAS (Z-INDEX):
+        z-0: Backgrounds, Watermarks, Gradients
+        z-10: Conteúdo de Texto e CTAs
+        z-20: Imagem do Consultor (Parallax Principal)
+        z-30: Branding e Logos Flutuantes
+      */}
+
+      {/* CAMADA 20: COLUNA ESQUERDA - FOTO DE PERFIL (PROFISSIONAL & 4K) */}
       <motion.div
         style={{ skewY: sectionSkew }}
-        initial={{ opacity: 0, x: -50, scale: 0.95 }}
+        initial={{ opacity: 0, x: -30, scale: 0.95 }}
         animate={{ opacity: 1, x: 0, scale: 1.0 }}
-        transition={{ duration: 1.5, ease: 'easeOut' }}
-        className="relative w-full lg:w-[45%] h-[60vh] lg:h-screen z-20 flex flex-col justify-end overflow-hidden"
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+        className="relative w-full lg:w-[45%] h-[55vh] sm:h-[65vh] lg:h-screen z-20 flex flex-col justify-end overflow-hidden"
       >
         <motion.div
           style={{
@@ -78,8 +86,8 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* COLUNA DIREITA - CONTEÚDO PREMIUM E CTA */}
-      <div className="relative w-full lg:w-[55%] min-h-screen flex items-center justify-center lg:justify-start px-8 sm:px-12 lg:pl-20 py-20 z-10">
+      {/* CAMADA 10: COLUNA DIREITA - CONTEÚDO PREMIUM E CTA */}
+      <div className="relative w-full lg:w-[55%] min-h-[60vh] lg:min-h-screen flex items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 py-12 lg:py-20 z-10">
 
         {/* WATERMARK RE/MAX SUTIL AO FUNDO (VERSÃO AMPLIADA E DINÂMICA) */}
         <motion.div
@@ -105,9 +113,9 @@ const Hero = () => {
           transition={{ duration: 1.2, delay: 0.4 }}
           className="relative z-10 max-w-xl lg:max-w-2xl space-y-8"
         >
-          {/* HEADLINE (H1) - MONTSERRAT EXTRABOLD */}
+          {/* HEADLINE (H1) - AJUSTADO PARA MOBILE ANDROID/IOS */}
           <div className="space-y-4">
-            <h1 className="font-montserrat text-4xl sm:text-6xl lg:text-[4.5rem] font-extrabold leading-[0.95] tracking-tight text-white">
+            <h1 className="font-montserrat text-3xl sm:text-5xl lg:text-[4.5rem] font-extrabold leading-[1.1] lg:leading-[0.95] tracking-tight text-white italic lg:not-italic">
               Excelência & <br />
               <span className="relative inline-block text-[#0055FF] animate-pulse-subtle">
                 Exclusividade
@@ -120,8 +128,8 @@ const Hero = () => {
               </span>
             </h1>
 
-            {/* SUBTÍTULO (H2) */}
-            <h2 className="text-lg sm:text-xl font-medium text-white leading-relaxed font-sans max-w-[90%]">
+            {/* SUBTÍTULO (H2) - RESPONSIVO E CLARO */}
+            <h2 className="text-base sm:text-lg lg:text-xl font-medium text-white/90 leading-relaxed font-sans max-w-[95%] lg:max-w-[90%]">
               Acesso privilegiado aos imóveis mais exclusivos do mercado, para quem procura privacidade e distinção.
             </h2>
           </div>

@@ -16,8 +16,19 @@ const FacebookIcon = ({ className }: { className?: string }) => (
 
 const Footer = () => {
   return (
-    <footer className="bg-zinc-950 pt-24 pb-12 border-t border-zinc-900">
-      <div className="container mx-auto px-6">
+    <footer className="relative bg-zinc-950 pt-24 pb-12 border-t border-zinc-900 overflow-hidden">
+      {/* LOGO3 BACKGROUND DEGRADE NO CANTO DIREITO */}
+      <div className="absolute -right-20 bottom-0 w-[400px] lg:w-[600px] opacity-[0.03] pointer-events-none z-0 select-none">
+        <img
+          src="/LOGO3-sem-fundo.png"
+          alt=""
+          className="w-full h-auto grayscale invert brightness-200"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-l from-zinc-950 via-transparent to-transparent" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-20">
           <div className="col-span-1 lg:col-span-1">
             <img src="/logo.png" alt="Helder Pinto" className="h-20 w-auto mb-8" />
@@ -84,7 +95,6 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-
         </div>
 
         <div className="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center text-[10px] text-zinc-600 uppercase font-bold tracking-[0.2em]">
