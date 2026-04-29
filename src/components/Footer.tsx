@@ -61,12 +61,11 @@ const Footer = () => {
                   <p className="text-white font-bold">+351 961 526 716</p>
                 </div>
               </li>
-              <li className="flex items-start space-x-4">
-                <Phone className="w-5 h-5 text-brand mt-0.5 shrink-0" />
-                <div className="text-sm">
-                  <p className="text-zinc-400">Rede Fixa Nacional</p>
-                  <p className="text-white font-bold">+351 232 373 044</p>
-                </div>
+              <li className="flex items-center space-x-4">
+                <Mail className="w-5 h-5 text-brand shrink-0" />
+                <a href="mailto:hpinto@remax.pt" className="text-white font-bold text-sm hover:text-brand transition-colors">
+                  hpinto@remax.pt
+                </a>
               </li>
             </ul>
           </div>
@@ -85,12 +84,6 @@ const Footer = () => {
                   Rua Padre Américo, nº 3 B<br />
                   3600-132, Castro Daire<br />
                   Castro Daire, Portugal
-                </a>
-              </li>
-              <li className="flex items-center space-x-4">
-                <Mail className="w-5 h-5 text-brand shrink-0" />
-                <a href="mailto:hpinto@remax.pt" className="text-zinc-400 text-sm hover:text-brand-light transition-colors">
-                  hpinto@remax.pt
                 </a>
               </li>
             </ul>

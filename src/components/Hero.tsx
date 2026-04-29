@@ -24,7 +24,7 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen flex flex-col lg:flex-row items-center justify-between overflow-hidden bg-[#000000] [perspective:1200px]"
+      className="relative w-full h-screen lg:min-h-screen flex flex-col lg:flex-row items-center justify-between overflow-hidden bg-[#000000] [perspective:1200px]"
     >
       {/* 
         ORGANIZAÇÃO DE CAMADAS (Z-INDEX):
@@ -34,13 +34,13 @@ const Hero = () => {
         z-30: Branding e Logos Flutuantes
       */}
 
-      {/* CAMADA 20: COLUNA ESQUERDA - FOTO DE PERFIL (PROFISSIONAL & 4K) */}
+      {/* CAMADA 20: FOTO DE PERFIL (PROFISSIONAL & 4K) - UNIFICADA NO MOBILE */}
       <motion.div
         style={{ skewY: sectionSkew }}
-        initial={{ opacity: 0, x: -30, scale: 0.95 }}
-        animate={{ opacity: 1, x: 0, scale: 1.0 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-        className="relative w-full lg:w-[45%] h-[55vh] sm:h-[65vh] lg:h-screen z-20 flex flex-col justify-end overflow-hidden"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1.0 }}
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+        className="absolute lg:relative inset-0 w-full lg:w-[45%] h-full z-10 lg:z-20 flex flex-col justify-end overflow-hidden"
       >
         <motion.div
           style={{
@@ -54,16 +54,16 @@ const Hero = () => {
           <img
             src="/helder1.png"
             alt="Helder Pinto"
-            className="w-full h-full object-cover lg:object-[center_10%] contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
+            className="w-full h-full object-contain lg:object-cover lg:object-[center_10%] contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
             style={{
               WebkitBackfaceVisibility: 'hidden',
               backfaceVisibility: 'hidden',
               transform: 'translateZ(0)'
             }}
           />
-          {/* Degradê de base reforçado para "aterrar" a imagem e a logo */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100 z-20" />
-          <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-black to-transparent z-20" />
+          {/* Degradê de base unificado para o mobile */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 lg:via-black/20 to-transparent opacity-100 lg:opacity-90 z-20" />
+          <div className="absolute bottom-0 left-0 w-full h-[50%] lg:h-[30%] bg-gradient-to-t from-black to-transparent z-20" />
         </motion.div>
 
         {/* LOGOTIPO HÉLDER PINTO COM SOMBRA DE BASE (SOMBRA DE CONTATO) */}
@@ -86,8 +86,8 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* CAMADA 10: COLUNA DIREITA - CONTEÚDO PREMIUM E CTA */}
-      <div className="relative w-full lg:w-[55%] min-h-[60vh] lg:min-h-screen flex items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 py-12 lg:py-20 z-10">
+      {/* CAMADA 10: CONTEÚDO PREMIUM SOBREPOSTO NO MOBILE */}
+      <div className="relative w-full lg:w-[55%] h-full flex items-end lg:items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 pb-16 lg:py-20 z-30">
 
         {/* WATERMARK RE/MAX SUTIL AO FUNDO (VERSÃO AMPLIADA E DINÂMICA) */}
         <motion.div
