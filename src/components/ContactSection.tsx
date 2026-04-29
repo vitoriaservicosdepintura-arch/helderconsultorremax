@@ -164,7 +164,7 @@ const ContactSection = () => {
                         className="w-full max-w-xl shadow-2xl relative"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-[60px] -z-10" />
-                        <div className="p-10 relative overflow-hidden h-full z-10 rounded-[2.5rem]">
+                        <div className="p-6 sm:p-10 relative overflow-hidden h-full z-10 rounded-[2.5rem]">
                             <div className="text-center mb-10">
                                 <h2 className="text-3xl font-black text-white flex items-center justify-center gap-2 mb-2">
                                     Fale comigo agora <span className="text-yellow-400">👇</span>
