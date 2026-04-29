@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useCMS } from '../context/CMSContext';
 
@@ -99,20 +99,25 @@ const Hero = () => {
           {/* Headline (H1) */}
           <div className="space-y-2 lg:space-y-4">
             <h1 className="font-montserrat text-3xl sm:text-5xl lg:text-[4.5rem] font-extrabold leading-[1.1] lg:leading-[0.95] tracking-tight text-white lg:not-italic drop-shadow-2xl">
-              {data.hero.title.split('&').map((text, i) => (
-                <React.Fragment key={i}>
-                  {text} {i === 0 && data.hero.title.includes('&') && '&'} <br />
-                </React.Fragment>
-              ))}
-              <span className="relative inline-block text-[#0055FF] animate-pulse-subtle">
-                Exclusividade
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: '100%' }}
-                  transition={{ duration: 1.5, delay: 1.5 }}
-                  className="absolute -bottom-1 lg:-bottom-2 left-0 h-[2px] lg:h-[3px] bg-[#0055FF]"
-                />
-              </span>
+              {(() => {
+                const words = data.hero.title.split(' ');
+                const lastWord = words.pop();
+                const firstPart = words.join(' ');
+                return (
+                  <>
+                    {firstPart} <br />
+                    <span className="relative inline-block text-[#0055FF] animate-pulse-subtle">
+                      {lastWord}
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: '100%' }}
+                        transition={{ duration: 1.5, delay: 1.5 }}
+                        className="absolute -bottom-1 lg:-bottom-2 left-0 h-[2px] lg:h-[3px] bg-[#0055FF]"
+                      />
+                    </span>
+                  </>
+                );
+              })()}
             </h1>
 
             {/* Subtítulo (H2) */}
