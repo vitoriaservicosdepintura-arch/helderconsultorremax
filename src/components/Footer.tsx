@@ -20,7 +20,7 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-20">
           <div className="col-span-1 lg:col-span-1">
-            <img src="/logo.png" alt="Helder Pinto" className="h-12 mb-8" />
+            <img src="/logo.png" alt="Helder Pinto" className="h-20 w-auto mb-8" />
             <p className="text-zinc-500 text-sm leading-relaxed mb-8">
               Consultor Imobiliário associado à RE/MAX Dinâmica Daire. Especialista em imóveis de luxo e investimentos imobiliários.
             </p>
@@ -77,8 +77,10 @@ const Footer = () => {
                 </a>
               </li>
               <li className="flex items-start space-x-4">
-                <Mail className="w-5 h-5 text-purple-500 mt-1 shrink-0" />
-                <p className="text-white text-sm font-bold">hpinto@remax.pt</p>
+                <a href="mailto:hpinto@remax.pt" target="_blank" rel="noreferrer" className="flex items-start space-x-4 group">
+                  <Mail className="w-5 h-5 text-purple-500 mt-1 shrink-0 group-hover:text-purple-400 transition-colors" />
+                  <span className="text-white text-sm font-bold group-hover:text-purple-400 transition-colors mt-1">hpinto@remax.pt</span>
+                </a>
               </li>
             </ul>
           </div>

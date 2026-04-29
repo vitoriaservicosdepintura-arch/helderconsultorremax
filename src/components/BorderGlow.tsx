@@ -80,7 +80,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
                 className="absolute inset-[1px] z-10 pointer-events-none"
                 style={{ borderRadius: borderRadius - 1, background: backgroundColor }}
             />
-            <div className="relative z-20 w-full h-full">{children}</div>
+            <div className="relative z-20 w-full h-full pointer-events-auto">{children}</div>
         </div>
     );
 }

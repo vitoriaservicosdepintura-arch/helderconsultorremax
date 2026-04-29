@@ -50,35 +50,39 @@ const FloatingSocialSidebar = () => {
             {socialLinks.map((link) => {
                 const Icon = link.Icon;
                 return (
-                    <motion.a
+                    <motion.div
                         key={link.id}
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={link.label}
                         whileHover={{ scale: 1.15, x: -4 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative group block shadow-lg rounded-2xl"
+                        className="relative group rounded-2xl shadow-lg"
                     >
                         <BorderGlow
                             edgeSensitivity={30}
                             glowColor="40 80 80"
-                            backgroundColor="#120F17"
+                            backgroundColor="#1e2436"
                             borderRadius={16}
                             glowRadius={40}
                             glowIntensity={1}
                             coneSpread={25}
                             animated={false}
                             colors={['#c084fc', '#f472b6', '#38bdf8']}
-                            className={`w-12 h-12 flex items-center justify-center text-purple-400 transition-all duration-300 ${link.hoverClass} hover:text-white`}
+                            className="w-12 h-12 block"
                         >
-                            <Icon className="w-5 h-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                            <a
+                                href={link.href}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label={link.label}
+                                className="w-full h-full flex items-center justify-center text-purple-400 group-hover:text-white transition-colors duration-300"
+                            >
+                                <Icon className="w-5 h-5 pointer-events-none" />
+                            </a>
                         </BorderGlow>
                         {/* Label tooltip */}
-                        <span className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap bg-[#1e2436] border border-zinc-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        <span className="absolute left-[calc(100%+14px)] top-1/2 -translate-y-1/2 whitespace-nowrap bg-[#1e2436] border border-zinc-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md">
                             {link.label}
                         </span>
-                    </motion.a>
+                    </motion.div>
                 );
             })}
 
@@ -150,7 +154,7 @@ const ContactSection = () => {
                     <BorderGlow
                         edgeSensitivity={30}
                         glowColor="40 80 80"
-                        backgroundColor="#120F17"
+                        backgroundColor="#121829"
                         borderRadius={40}
                         glowRadius={150}
                         glowIntensity={1}
@@ -160,7 +164,7 @@ const ContactSection = () => {
                         className="w-full max-w-xl shadow-2xl relative"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-[60px] -z-10" />
-                        <div className="p-10 relative overflow-hidden h-full z-10 border border-zinc-800 rounded-[2.5rem]">
+                        <div className="p-10 relative overflow-hidden h-full z-10 rounded-[2.5rem]">
                             <div className="text-center mb-10">
                                 <h2 className="text-3xl font-black text-white flex items-center justify-center gap-2 mb-2">
                                     Fale comigo agora <span className="text-yellow-400">👇</span>
@@ -248,29 +252,30 @@ const ContactSection = () => {
                     {socialLinks.map((link) => {
                         const Icon = link.Icon;
                         return (
-                            <a
-                                key={link.id}
-                                href={link.href}
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label={link.label}
-                                className="relative rounded-2xl block"
-                            >
+                            <div key={link.id} className="relative rounded-2xl block group shadow-lg">
                                 <BorderGlow
                                     edgeSensitivity={30}
                                     glowColor="40 80 80"
-                                    backgroundColor="#120F17"
+                                    backgroundColor="#1e2436"
                                     borderRadius={16}
                                     glowRadius={40}
                                     glowIntensity={1}
                                     coneSpread={25}
                                     animated={false}
                                     colors={['#c084fc', '#f472b6', '#38bdf8']}
-                                    className={`w-12 h-12 flex items-center justify-center text-purple-400 transition-all duration-300 ${link.hoverClass} hover:text-white`}
+                                    className="w-12 h-12 block"
                                 >
-                                    <Icon className="w-5 h-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                                    <a
+                                        href={link.href}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        aria-label={link.label}
+                                        className="w-full h-full flex items-center justify-center text-purple-400 group-hover:text-white transition-colors duration-300"
+                                    >
+                                        <Icon className="w-5 h-5 pointer-events-none" />
+                                    </a>
                                 </BorderGlow>
-                            </a>
+                            </div>
                         );
                     })}
                 </div>
