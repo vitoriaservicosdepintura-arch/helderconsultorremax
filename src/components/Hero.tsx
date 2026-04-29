@@ -87,7 +87,7 @@ const Hero = () => {
       </motion.div>
 
       {/* CAMADA 10: CONTEÚDO TEXTUAL - ABAIXO DA IMAGEM NO MOBILE */}
-      <div className="relative w-full lg:w-[55%] h-auto lg:h-screen flex items-start lg:items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 py-10 lg:py-20 z-10">
+      <div className="relative w-full lg:w-[55%] h-auto lg:h-screen flex items-start lg:items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 pt-10 pb-0 lg:py-20 z-10">
 
         {/* WATERMARK RE/MAX SUTIL AO FUNDO (VERSÃO AMPLIADA E DINÂMICA) */}
         <motion.div
