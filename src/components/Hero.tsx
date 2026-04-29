@@ -49,6 +49,26 @@ const Hero = () => {
       >
       </motion.div>
 
+      {/* Logotipos Mobile - Apenas em modo Retrato */}
+      <div className="lg:hidden absolute bottom-20 left-0 w-full flex-col items-center justify-center gap-4 z-30 pointer-events-none hidden portrait:flex landscape:hidden">
+        <motion.img
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          src="/logo.png"
+          alt="Helder Pinto Logo"
+          className="h-20 w-auto object-contain"
+        />
+        <motion.img
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          src="/LOGO3-sem-fundo.png"
+          alt="RE/MAX Balloon"
+          className="h-16 w-auto object-contain"
+        />
+      </div>
+
       {/* Scroll indicator */}
       <motion.div
         style={{ opacity: indicatorOpacity }}
@@ -70,3 +90,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
