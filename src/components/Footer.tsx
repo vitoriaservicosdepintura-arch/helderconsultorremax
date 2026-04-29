@@ -25,13 +25,13 @@ const Footer = () => {
               Consultor Imobiliário associado à RE/MAX Dinâmica Daire. Especialista em imóveis de luxo e investimentos imobiliários.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.instagram.com/helderpinto.consultor/" target="_blank" rel="noreferrer" className="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-500 transition-colors text-white">
+              <a href="https://www.instagram.com/helderpinto.consultor/" target="_blank" rel="noreferrer" className="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-gradient-to-br hover:from-brand hover:to-brand-red transition-colors text-white">
                 <InstagramIcon className="w-5 h-5" />
               </a>
               <a href="https://www.facebook.com/p/Helder-Pinto-61576692584924/" target="_blank" rel="noreferrer" className="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors text-white">
                 <FacebookIcon className="w-5 h-5" />
               </a>
-              <a href="https://remax.pt/pt/agente/helder-pinto/126421031" target="_blank" rel="noreferrer" className="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-purple-600 transition-colors text-white">
+              <a href="https://remax.pt/pt/agente/helder-pinto/126421031" target="_blank" rel="noreferrer" className="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-brand transition-colors text-white">
                 <Globe className="w-5 h-5" />
               </a>
               <a href="https://wa.me/351961526716" target="_blank" rel="noreferrer" className="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors text-white">
@@ -44,14 +44,14 @@ const Footer = () => {
             <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-8">Contatos</h4>
             <ul className="space-y-6">
               <li className="flex items-start space-x-4">
-                <Phone className="w-5 h-5 text-purple-500 mt-0.5 shrink-0" />
+                <Phone className="w-5 h-5 text-brand mt-0.5 shrink-0" />
                 <div className="text-sm">
                   <p className="text-zinc-400">Telemóvel Nacional</p>
                   <p className="text-white font-bold">+351 961 526 716</p>
                 </div>
               </li>
               <li className="flex items-start space-x-4">
-                <Phone className="w-5 h-5 text-purple-500 mt-0.5 shrink-0" />
+                <Phone className="w-5 h-5 text-brand mt-0.5 shrink-0" />
                 <div className="text-sm">
                   <p className="text-zinc-400">Rede Fixa Nacional</p>
                   <p className="text-white font-bold">+351 232 373 044</p>
@@ -64,12 +64,12 @@ const Footer = () => {
             <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-8">Localização</h4>
             <ul className="space-y-6">
               <li className="flex items-start space-x-4">
-                <MapPin className="w-5 h-5 text-purple-500 mt-0.5 shrink-0" />
+                <MapPin className="w-5 h-5 text-brand mt-0.5 shrink-0" />
                 <a
                   href="https://maps.google.com/?q=Rua+Padre+Am%C3%A9rico+3B+3600-132+Castro+Daire"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-zinc-400 text-sm hover:text-purple-400 transition-colors leading-relaxed"
+                  className="text-zinc-400 text-sm hover:text-brand-light transition-colors leading-relaxed"
                 >
                   Rua Padre Américo, nº 3 B<br />
                   3600-132, Castro Daire<br />
@@ -77,8 +77,8 @@ const Footer = () => {
                 </a>
               </li>
               <li className="flex items-center space-x-4">
-                <Mail className="w-5 h-5 text-purple-500 shrink-0" />
-                <a href="mailto:hpinto@remax.pt" className="text-zinc-400 text-sm hover:text-purple-400 transition-colors">
+                <Mail className="w-5 h-5 text-brand shrink-0" />
+                <a href="mailto:hpinto@remax.pt" className="text-zinc-400 text-sm hover:text-brand-light transition-colors">
                   hpinto@remax.pt
                 </a>
               </li>
@@ -90,8 +90,8 @@ const Footer = () => {
         <div className="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center text-[10px] text-zinc-600 uppercase font-bold tracking-[0.2em]">
           <p>© 2024 Helder Pinto - RE/MAX Dinâmica Daire. Todos os direitos reservados.</p>
           <div className="flex space-x-8 mt-4 md:mt-0">
-            <a href="#" className="hover:text-purple-500 transition-colors">Privacidade</a>
-            <a href="#" className="hover:text-purple-500 transition-colors">Termos</a>
+            <a href="#" className="hover:text-brand transition-colors">Privacidade</a>
+            <a href="#" className="hover:text-brand transition-colors">Termos</a>
           </div>
         </div>
       </div>

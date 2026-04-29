@@ -12,9 +12,9 @@ function App() {
   });
 
   return (
-    <div className="bg-[#09090b] text-white min-h-screen font-sans selection:bg-purple-500/30">
+    <div className="bg-[#09090b] text-white min-h-screen font-sans selection:bg-brand/30">
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-purple-600 origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-brand origin-left z-50"
         style={{ scaleX }}
       />
 

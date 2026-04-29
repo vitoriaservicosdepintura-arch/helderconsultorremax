@@ -21,14 +21,14 @@ type Props = {
 };
 
 const iconMap: Record<string, React.ReactNode> = {
-    area: <Ruler className="w-4 h-4 text-purple-400" />,
-    bed: <Bed className="w-4 h-4 text-purple-400" />,
-    bath: <Bath className="w-4 h-4 text-purple-400" />,
-    calendar: <Calendar className="w-4 h-4 text-purple-400" />,
-    layers: <Layers className="w-4 h-4 text-purple-400" />,
-    car: <Car className="w-4 h-4 text-purple-400" />,
-    home: <Home className="w-4 h-4 text-purple-400" />,
-    zap: <Zap className="w-4 h-4 text-purple-400" />,
+    area: <Ruler className="w-4 h-4 text-brand-light" />,
+    bed: <Bed className="w-4 h-4 text-brand-light" />,
+    bath: <Bath className="w-4 h-4 text-brand-light" />,
+    calendar: <Calendar className="w-4 h-4 text-brand-light" />,
+    layers: <Layers className="w-4 h-4 text-brand-light" />,
+    car: <Car className="w-4 h-4 text-brand-light" />,
+    home: <Home className="w-4 h-4 text-brand-light" />,
+    zap: <Zap className="w-4 h-4 text-brand-light" />,
 };
 
 const PropertyModal = ({ property, onClose }: Props) => {
@@ -79,7 +79,7 @@ const PropertyModal = ({ property, onClose }: Props) => {
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
-                                <div className="absolute top-4 left-4 bg-purple-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
+                                <div className="absolute top-4 left-4 bg-brand text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
                                     Destaque
                                 </div>
                                 <div className="absolute bottom-4 left-6">
@@ -89,8 +89,8 @@ const PropertyModal = ({ property, onClose }: Props) => {
 
                             <div className="p-6">
                                 <h2 className="text-2xl font-black text-white mb-1">{property.title}</h2>
-                                <p className="text-purple-400 text-sm font-semibold mb-6 flex items-center gap-2">
-                                    <span className="w.1.5 h-1.5 bg-purple-500 rounded-full inline-block" />
+                                <p className="text-brand-light text-sm font-semibold mb-6 flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 bg-brand rounded-full inline-block" />
                                     {property.location}
                                 </p>
 
@@ -126,7 +126,7 @@ const PropertyModal = ({ property, onClose }: Props) => {
                                     href={`https://wa.me/351961526716?text=${encodeURIComponent("Olá Helder, gostaria de obter mais informações sobre o imóvel: " + property.title)}`}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="mt-8 w-full flex items-center justify-center gap-2 bg-[#00529b] hover:bg-[#00427c] text-white font-extrabold py-4 rounded-2xl text-sm uppercase tracking-widest transition-all shadow-lg"
+                                    className="mt-8 w-full flex items-center justify-center gap-2 bg-brand hover:bg-brand-dark text-white font-extrabold py-4 rounded-2xl text-sm uppercase tracking-widest transition-all shadow-lg"
                                 >
                                     Ver Detalhes
                                 </a>

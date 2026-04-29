@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function LightPillar({
-    topColor = "#5227FF",
-    bottomColor = "#FF9FFC",
+    topColor = "#003DA5",
+    bottomColor = "#00529b",
     intensity = 1,
     rotationSpeed = 0.3,
     glowAmount = 0.002,

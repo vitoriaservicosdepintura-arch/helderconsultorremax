@@ -56,7 +56,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.4 }}
-          className="text-7xl font-['Caveat'] text-white drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] mt-[-2vh]"
+          className="text-7xl font-['Caveat'] text-white drop-shadow-[0_0_8px_rgba(0,61,165,0.8)] mt-[-2vh]"
         >
           Helder Pinto
         </motion.h1>
@@ -113,7 +113,7 @@ const Hero = () => {
           transition={{ repeat: Infinity, duration: 1.4, ease: 'easeInOut' }}
           className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center pt-2"
         >
-          <div className="w-1 h-2 rounded-full bg-purple-400" />
+          <div className="w-1 h-2 rounded-full bg-brand" />
         </motion.div>
       </motion.div>
     </section>

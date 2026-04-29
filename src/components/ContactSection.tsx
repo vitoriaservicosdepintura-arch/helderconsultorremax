@@ -55,10 +55,10 @@ const FloatingSocialSidebar = () => {
                             glowRadius={40}
                             glowIntensity={1}
                             coneSpread={25}
-                            colors={['#c084fc', '#f472b6', '#38bdf8']}
+                            colors={['#003DA5', '#E11B22', '#FFFFFF']}
                             className="w-12 h-12 block"
                         >
-                            <a href={link.href} target="_blank" rel="noreferrer" className="w-full h-full flex items-center justify-center text-purple-400 group-hover:text-white transition-colors duration-300">
+                            <a href={link.href} target="_blank" rel="noreferrer" className="w-full h-full flex items-center justify-center text-brand-light group-hover:text-white transition-colors duration-300">
                                 <Icon className="w-5 h-5" />
                             </a>
                         </BorderGlow>
@@ -68,7 +68,7 @@ const FloatingSocialSidebar = () => {
                     </motion.div>
                 );
             })}
-            <div className="w-px h-12 bg-gradient-to-b from-purple-600/40 to-transparent mt-2" />
+            <div className="w-px h-12 bg-gradient-to-b from-brand/40 to-transparent mt-2" />
         </div>
     );
 };
@@ -132,7 +132,7 @@ const ContactSection = () => {
                         glowRadius={150}
                         glowIntensity={1}
                         coneSpread={25}
-                        colors={['#c084fc', '#f472b6', '#38bdf8']}
+                        colors={['#003DA5', '#E11B22', '#FFFFFF']}
                         className="w-full max-w-xl shadow-2xl relative"
                     >
                         <div className="p-6 sm:p-10 relative z-10 rounded-[2.5rem]">
@@ -143,7 +143,7 @@ const ContactSection = () => {
 
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="relative group">
-                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 focus-within:text-blue-500" />
+                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 focus-within:text-brand" />
                                     <input type="text" placeholder="O seu nome completo" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-[#1e2436] text-white pl-12 pr-4 py-4 rounded-2xl outline-none" />
                                 </div>
                                 <div className="relative group">
@@ -163,7 +163,7 @@ const ContactSection = () => {
                                         <option value="info">ℹ️ Apenas informações</option>
                                     </select>
                                 </div>
-                                <motion.button whileHover={{ scale: 1.02 }} type="submit" className="w-full bg-[#00529b] text-white font-extrabold py-5 rounded-2xl text-lg flex items-center justify-center gap-3 shadow-lg uppercase tracking-wider mt-6">
+                                <motion.button whileHover={{ scale: 1.02 }} type="submit" className="w-full bg-brand hover:bg-brand-light text-white font-extrabold py-5 rounded-2xl text-lg flex items-center justify-center gap-3 shadow-lg uppercase tracking-wider mt-6 transition-colors">
                                     QUERO SER CONTACTADO <ArrowRight className="w-5 h-5" />
                                 </motion.button>
                             </form>
