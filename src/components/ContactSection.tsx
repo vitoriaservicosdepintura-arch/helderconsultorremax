@@ -79,7 +79,7 @@ const ContactSection = () => {
         name: '',
         phone: '',
         email: '',
-        interest: 'Quero comprar um imóvel'
+        interest: '🏠 Quero comprar um imóvel'
     });
 
     const handleWhatsAppClick = () => {
@@ -187,10 +187,10 @@ const ContactSection = () => {
                                     onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
                                     className="w-full bg-[#1e2436] border border-transparent focus:border-blue-500/50 text-white pl-12 pr-4 py-4 rounded-2xl outline-none transition-all appearance-none cursor-pointer"
                                 >
-                                    <option value="Quero comprar um imóvel">Quero comprar um imóvel</option>
-                                    <option value="Quero vender um imóvel">Quero vender um imóvel</option>
-                                    <option value="Quero investir em imóveis">Quero investir em imóveis</option>
-                                    <option value="Apenas informações">Apenas informações</option>
+                                    <option value="🏠 Quero comprar um imóvel">🏠 Quero comprar um imóvel</option>
+                                    <option value="🔑 Quero vender um imóvel">🔑 Quero vender um imóvel</option>
+                                    <option value="📈 Quero investir em imóveis">📈 Quero investir em imóveis</option>
+                                    <option value="ℹ️ Apenas informações">ℹ️ Apenas informações</option>
                                 </select>
                                 <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500 text-sm">▼</div>
                             </div>
