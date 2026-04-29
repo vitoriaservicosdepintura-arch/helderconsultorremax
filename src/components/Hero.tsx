@@ -24,7 +24,7 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen lg:min-h-screen flex flex-col lg:flex-row items-center justify-between overflow-hidden bg-[#000000] [perspective:1200px]"
+      className="relative w-full min-h-screen flex flex-col lg:flex-row items-stretch lg:items-center justify-between overflow-hidden bg-[#000000] [perspective:1200px]"
     >
       {/* 
         ORGANIZAÇÃO DE CAMADAS (Z-INDEX):
@@ -34,13 +34,13 @@ const Hero = () => {
         z-30: Branding e Logos Flutuantes
       */}
 
-      {/* CAMADA 20: FOTO DE PERFIL (PROFISSIONAL & 4K) - UNIFICADA NO MOBILE */}
+      {/* CAMADA 20: COLUNA DA IMAGEM - SEMPRE NO TOPO NO MOBILE */}
       <motion.div
         style={{ skewY: sectionSkew }}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1.0 }}
         transition={{ duration: 1.5, ease: 'easeOut' }}
-        className="absolute lg:relative inset-0 w-full lg:w-[45%] h-full z-10 lg:z-20 flex flex-col justify-end overflow-hidden"
+        className="relative w-full lg:w-[45%] h-[45vh] sm:h-[55vh] lg:h-screen z-20 flex flex-col justify-end overflow-hidden"
       >
         <motion.div
           style={{
@@ -54,7 +54,7 @@ const Hero = () => {
           <img
             src="/helder1.png"
             alt="Helder Pinto"
-            className="w-full h-full object-cover lg:object-cover lg:object-[center_10%] object-top contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
+            className="w-full h-full object-contain lg:object-cover lg:object-[center_10%] contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
             style={{
               WebkitBackfaceVisibility: 'hidden',
               backfaceVisibility: 'hidden',
@@ -86,8 +86,8 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* CAMADA 10: CONTEÚDO PREMIUM - POSICIONAMENTO E BAIXO PARA NÃO COBRIR O ROSTO */}
-      <div className="relative w-full lg:w-[55%] h-full flex items-end lg:items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 pb-8 lg:py-20 z-30">
+      {/* CAMADA 10: CONTEÚDO TEXTUAL - ABAIXO DA IMAGEM NO MOBILE */}
+      <div className="relative w-full lg:w-[55%] h-auto lg:h-screen flex items-start lg:items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 py-10 lg:py-20 z-10">
 
         {/* WATERMARK RE/MAX SUTIL AO FUNDO (VERSÃO AMPLIADA E DINÂMICA) */}
         <motion.div
