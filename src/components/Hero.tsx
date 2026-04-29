@@ -34,13 +34,13 @@ const Hero = () => {
         z-30: Branding e Logos Flutuantes
       */}
 
-      {/* CAMADA 20: COLUNA DA IMAGEM - SEMPRE NO TOPO NO MOBILE */}
+      {/* CAMADA 20: COLUNA DA IMAGEM - SEMPRE NO TOPO NO MOBILE (AMPLIADA) */}
       <motion.div
         style={{ skewY: sectionSkew }}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1.0 }}
         transition={{ duration: 1.5, ease: 'easeOut' }}
-        className="relative w-full lg:w-[45%] h-[45vh] sm:h-[55vh] lg:h-screen z-20 flex flex-col justify-end overflow-hidden"
+        className="relative w-full lg:w-[45%] h-[65vh] sm:h-[75vh] lg:h-screen z-20 flex flex-col justify-end overflow-hidden"
       >
         <motion.div
           style={{
@@ -54,7 +54,7 @@ const Hero = () => {
           <img
             src="/helder1.png"
             alt="Helder Pinto"
-            className="w-full h-full object-contain lg:object-cover lg:object-[center_10%] contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
+            className="w-full h-full object-cover lg:object-cover lg:object-[center_10%] object-[center_20%] contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
             style={{
               WebkitBackfaceVisibility: 'hidden',
               backfaceVisibility: 'hidden',
@@ -80,7 +80,7 @@ const Hero = () => {
             <img
               src="/logo.png"
               alt="Hélder Pinto"
-              className="relative z-10 w-full max-w-[280px] lg:max-w-[380px] h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,1)]"
+              className="relative z-10 w-full max-w-[320px] lg:max-w-[380px] h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,1)]"
             />
           </div>
         </motion.div>
