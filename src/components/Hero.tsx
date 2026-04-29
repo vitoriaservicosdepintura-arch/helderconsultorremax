@@ -56,7 +56,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.4 }}
-          className="text-7xl font-['Caveat'] text-white drop-shadow-[0_0_20px_rgba(168,85,247,0.9)] mt-[-10vh]"
+          className="text-7xl font-['Caveat'] text-white drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] mt-[-2vh]"
         >
           Helder Pinto
         </motion.h1>
@@ -64,14 +64,14 @@ const Hero = () => {
 
 
       {/* Logotipos Mobile - Apenas em modo Retrato */}
-      <div className="lg:hidden absolute bottom-24 left-0 w-full flex-col items-center justify-center gap-6 z-30 pointer-events-none hidden portrait:flex landscape:hidden">
+      <div className="lg:hidden absolute bottom-20 left-0 w-full flex-col items-center justify-center gap-6 z-30 pointer-events-none hidden portrait:flex landscape:hidden">
         <motion.img
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
           src="/logo.png"
           alt="Helder Pinto Logo"
-          className="h-32 w-auto object-contain"
+          className="h-44 w-auto object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
         />
         <motion.img
           initial={{ opacity: 0, y: 10 }}
