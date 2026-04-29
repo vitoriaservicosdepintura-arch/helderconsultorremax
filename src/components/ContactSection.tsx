@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Phone, Mail, User, Home, ArrowRight, MessageCircle, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BorderGlow from './BorderGlow';
+import { useCMS } from '../context/CMSContext';
 
-// Instagram SVG
 const InstagramIcon = ({ className }: { className?: string }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -12,35 +12,21 @@ const InstagramIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 
-// Facebook SVG
 const FacebookIcon = ({ className }: { className?: string }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
     </svg>
 );
 
-const socialLinks = [
-    {
-        id: 'instagram',
-        Icon: InstagramIcon,
-        href: 'https://www.instagram.com/helderpinto.consultor/',
-        label: 'Instagram',
-    },
-    {
-        id: 'facebook',
-        Icon: FacebookIcon,
-        href: 'https://www.facebook.com/p/Helder-Pinto-61576692584924/',
-        label: 'Facebook',
-    },
-    {
-        id: 'site',
-        Icon: Globe,
-        href: 'https://remax.pt/pt/agente/helder-pinto/126421031',
-        label: 'Website',
-    },
-];
-
 const FloatingSocialSidebar = () => {
+    const { data } = useCMS();
+
+    const socialLinks = [
+        { id: 'instagram', Icon: InstagramIcon, href: data.footer.socials.instagram, label: 'Instagram' },
+        { id: 'facebook', Icon: FacebookIcon, href: data.footer.socials.facebook, label: 'Facebook' },
+        { id: 'site', Icon: Globe, href: data.footer.socials.remax, label: 'Website' },
+    ];
+
     return (
         <div className="hidden lg:flex flex-col items-center gap-4 relative self-center">
             {socialLinks.map((link) => {
@@ -74,6 +60,7 @@ const FloatingSocialSidebar = () => {
 };
 
 const ContactSection = () => {
+    const { data } = useCMS();
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -90,11 +77,11 @@ const ContactSection = () => {
 
     const handleWhatsAppClick = () => {
         const text = encodeURIComponent('Olá Helder, gostaria de obter mais informações sobre os seus serviços imobiliários.');
-        window.open(`https://wa.me/351961526716?text=${text}`, '_blank');
+        window.open(`${data.footer.socials.whatsapp}?text=${text}`, '_blank');
     };
 
     const handleCallClick = () => {
-        window.location.href = "tel:+351961526716";
+        window.location.href = `tel:${data.footer.phone}`;
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -108,7 +95,7 @@ const ContactSection = () => {
             `✉️ *E-mail:* ${formData.email}\n` +
             `🏠 *Interesse:* ${interestLabel}`
         );
-        window.open(`https://wa.me/351961526716?text=${message}`, '_blank');
+        window.open(`${data.footer.socials.whatsapp}?text=${message}`, '_blank');
     };
 
     return (

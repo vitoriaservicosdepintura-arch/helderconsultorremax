@@ -3,7 +3,11 @@ import Hero from './components/Hero';
 import Properties from './components/Properties';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import AdminPanel from './components/AdminPanel';
+import { useCMS } from './context/CMSContext';
+
 function App() {
+  const { isAdmin } = useCMS();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -13,11 +17,12 @@ function App() {
 
   return (
     <div className="bg-[#050507] text-white min-h-screen font-sans selection:bg-brand/30">
+      {isAdmin && <AdminPanel />}
+
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-brand origin-left z-50"
         style={{ scaleX }}
       />
-
 
       <main>
         <Hero />

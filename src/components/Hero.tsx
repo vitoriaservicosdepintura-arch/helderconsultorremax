@@ -1,7 +1,9 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useCMS } from '../context/CMSContext';
 
 const Hero = () => {
+  const { data } = useCMS();
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -26,15 +28,7 @@ const Hero = () => {
       ref={containerRef}
       className="relative w-full min-h-screen flex flex-col lg:flex-row items-stretch lg:items-center justify-between overflow-hidden bg-[#000000] [perspective:1200px]"
     >
-      {/* 
-        ORGANIZAÇÃO DE CAMADAS (Z-INDEX):
-        z-0: Backgrounds, Watermarks, Gradients
-        z-10: Conteúdo de Texto e CTAs
-        z-20: Imagem do Consultor (Parallax Principal)
-        z-30: Branding e Logos Flutuantes
-      */}
-
-      {/* CAMADA 20: COLUNA DA IMAGEM - SEMPRE NO TOPO NO MOBILE (AMPLIADA) */}
+      {/* CAMADA 20: COLUNA DA IMAGEM */}
       <motion.div
         style={{ skewY: sectionSkew }}
         initial={{ opacity: 0, scale: 0.95 }}
@@ -52,21 +46,14 @@ const Hero = () => {
           className="absolute inset-0 w-full h-full"
         >
           <img
-            src="/helder1.png"
+            src={data.hero.image}
             alt="Helder Pinto"
             className="w-full h-full object-cover lg:object-cover lg:object-[center_10%] object-[center_20%] contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
-            style={{
-              WebkitBackfaceVisibility: 'hidden',
-              backfaceVisibility: 'hidden',
-              transform: 'translateZ(0)'
-            }}
           />
-          {/* Degradê de base planejado para não ter espaços vazios */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 lg:via-black/20 to-transparent opacity-100 lg:opacity-90 z-20" />
           <div className="absolute bottom-0 left-0 w-full h-[60%] lg:h-[30%] bg-gradient-to-t from-black via-black to-transparent z-20" />
         </motion.div>
 
-        {/* LOGOTIPO HÉLDER PINTO COM SOMBRA DE BASE (SOMBRA DE CONTATO) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,11 +61,9 @@ const Hero = () => {
           className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 w-full flex justify-center pointer-events-none"
         >
           <div className="relative group flex justify-center w-full">
-            {/* SOMBRA ESFUMAÇADA ESPECÍFICA PARA A LOGO */}
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[80%] h-12 bg-black/60 blur-[30px] rounded-full z-0" />
-
             <img
-              src="/logo.png"
+              src={data.hero.logo}
               alt="Hélder Pinto"
               className="relative z-10 w-full max-w-[320px] lg:max-w-[380px] h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,1)]"
             />
@@ -86,10 +71,8 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* CAMADA 10: CONTEÚDO TEXTUAL - ABAIXO DA IMAGEM NO MOBILE */}
+      {/* CAMADA 10: CONTEÚDO TEXTUAL */}
       <div className="relative w-full lg:w-[55%] h-auto lg:h-screen flex items-start lg:items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 pt-10 pb-0 lg:py-20 z-10">
-
-        {/* WATERMARK RE/MAX SUTIL AO FUNDO (VERSÃO AMPLIADA E DINÂMICA) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.08 }}
@@ -116,7 +99,11 @@ const Hero = () => {
           {/* Headline (H1) */}
           <div className="space-y-2 lg:space-y-4">
             <h1 className="font-montserrat text-3xl sm:text-5xl lg:text-[4.5rem] font-extrabold leading-[1.1] lg:leading-[0.95] tracking-tight text-white lg:not-italic drop-shadow-2xl">
-              Excelência & <br />
+              {data.hero.title.split('&').map((text, i) => (
+                <React.Fragment key={i}>
+                  {text} {i === 0 && data.hero.title.includes('&') && '&'} <br />
+                </React.Fragment>
+              ))}
               <span className="relative inline-block text-[#0055FF] animate-pulse-subtle">
                 Exclusividade
                 <motion.div
@@ -130,7 +117,7 @@ const Hero = () => {
 
             {/* Subtítulo (H2) */}
             <h2 className="text-base sm:text-lg lg:text-xl font-medium text-white/90 leading-relaxed font-sans max-w-[95%] lg:max-w-[90%]">
-              Acesso privilegiado aos imóveis mais exclusivos do mercado, para quem procura privacidade e distinção.
+              {data.hero.subtitle}
             </h2>
           </div>
 
@@ -138,11 +125,11 @@ const Hero = () => {
           <div className="flex gap-4 lg:gap-8 items-stretch mb-4 lg:mb-0">
             <div className="w-[3px] bg-[#FF0000] rounded-full flex-shrink-0" />
             <p className="text-sm sm:text-lg text-[#CCCCCC] font-normal leading-relaxed font-sans line-clamp-3 lg:line-clamp-none">
-              Descubra análises estratégicas, tendências do mercado imobiliário e oportunidades reservadas a investidores criteriosos. Mais do que informação — inteligência aplicada para decisões que elevam e preservam patrimônios.
+              {data.hero.description}
             </p>
           </div>
 
-          {/* Botão CTA */}
+          {/* CTA Button */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -159,6 +146,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
+      {/* Luxury Accents */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#0033aa]/10 to-transparent pointer-events-none z-0" />
     </section>
   );

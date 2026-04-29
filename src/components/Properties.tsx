@@ -2,67 +2,16 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Home, Ruler, Bed, Bath } from 'lucide-react';
 import PropertyModal, { type PropertyDetails } from './PropertyModal';
+import { useCMS } from '../context/CMSContext';
 
 const Properties = () => {
-  const properties: PropertyDetails[] = [
-    {
-      id: 1,
-      title: 'Moradia T2',
-      location: 'Castro Daire',
-      price: '158 000 €',
-      image: '/imoveis/Moradia T2 à venda em Castro Daire.jpg',
-      area: '60 m²',
-      beds: 2,
-      baths: 1,
-      description: 'Situada em pleno centro da vila de Castro Daire, esta moradia T2 em pedra com um potencial enorme de investimento, ideal para habitação própria ou para Alojamento Local.',
-      details: [
-        { label: 'Área Bruta Privativa m²', value: '60', icon: 'area' },
-        { label: 'Área Útil m²', value: '49', icon: 'area' },
-        { label: 'Quartos', value: '2', icon: 'bed' },
-        { label: 'Ano de Construção', value: '1970', icon: 'calendar' },
-        { label: 'WC / Casas de banho', value: '1', icon: 'bath' },
-      ]
-    },
-    {
-      id: 2,
-      title: 'Moradia T4',
-      location: 'Castro Daire',
-      price: '220 000 €',
-      image: '/imoveis/Moradia T4 à venda em Castro Daire.jpg',
-      area: '150 m²',
-      beds: 4,
-      baths: 3,
-      description: 'A apenas cerca de 7km do centro de Castro Daire, esta moradia em pedra combina a tranquilidade da natureza, com o conforto e funcionalidade para o seu dia a dia.',
-      details: [
-        { label: 'Área Bruta Privativa m²', value: '150', icon: 'area' },
-        { label: 'Área Total do Lote m²', value: '900', icon: 'area' },
-        { label: 'Área Útil m²', value: '120', icon: 'area' },
-        { label: 'Quartos', value: '4', icon: 'bed' },
-        { label: 'Ano de Construção', value: '1996', icon: 'calendar' },
-        { label: 'WC / Casas de banho', value: '3', icon: 'bath' },
-      ]
-    },
-    {
-      id: 3,
-      title: 'Terreno',
-      location: 'Lamelas, Castro Daire',
-      price: '45 000 €',
-      image: '/imoveis/Terreno à venda em Castro Daire.jpg',
-      area: '1620 m²',
-      beds: 0,
-      baths: 0,
-      description: 'Terreno situado em espaço urbano, para construção em Lamelas, Castro Daire.',
-      details: [
-        { label: 'Área Total do Lote m²', value: '1 620', icon: 'area' },
-        { label: 'Eficiência Energética', value: 'Ver certificado', icon: 'zap' },
-      ]
-    }
-  ];
+  const { data } = useCMS();
+  const properties = data.properties;
 
   const [selectedProperty, setSelectedProperty] = useState<PropertyDetails | null>(null);
 
   return (
-    <section className="pt-10 lg:pt-24 pb-10 lg:pb-24 relative overflow-hidden">
+    <section className="pt-10 lg:pt-24 pb-10 lg:pb-24 relative overflow-hidden" id="properties">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <h2 className="text-brand font-bold tracking-widest text-sm uppercase mb-4">Portfólio em Destaque</h2>
