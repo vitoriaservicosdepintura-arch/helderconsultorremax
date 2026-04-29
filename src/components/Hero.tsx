@@ -62,6 +62,7 @@ const Hero = () => {
         </motion.h1>
       </div>
 
+
       {/* Logotipos Mobile - Apenas em modo Retrato */}
       <div className="lg:hidden absolute bottom-24 left-0 w-full flex-col items-center justify-center gap-6 z-30 pointer-events-none hidden portrait:flex landscape:hidden">
         <motion.img
@@ -82,7 +83,6 @@ const Hero = () => {
         />
       </div>
 
-
       {/* Ícone de Rotação (Dica Visual Mobile Retrato) */}
       <motion.div
         className="lg:hidden absolute bottom-12 right-6 z-40 flex flex-col items-center gap-2 portrait:flex hidden landscape:hidden text-white/30"
@@ -96,7 +96,7 @@ const Hero = () => {
         >
           <Smartphone size={28} strokeWidth={1.5} />
         </motion.div>
-        <span className="text-[8px] uppercase tracking-[0.2em] font-black">Girar</span>
+        <span className="text-[8px] uppercase tracking-[0.2em] font-black">Rodar</span>
       </motion.div>
 
 
@@ -106,7 +106,7 @@ const Hero = () => {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
       >
         <span className="text-white/50 text-xs uppercase tracking-widest font-semibold">
-          Scroll
+          Descubra
         </span>
         <motion.div
           animate={{ y: [0, 10, 0] }}

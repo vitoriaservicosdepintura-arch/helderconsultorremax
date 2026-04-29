@@ -42,16 +42,16 @@ const Footer = () => {
 
           <div>
             <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-8">Contatos</h4>
-            <ul className="space-y-4">
+            <ul className="space-y-6">
               <li className="flex items-start space-x-4">
-                <Phone className="w-5 h-5 text-purple-500 mt-1 shrink-0" />
+                <Phone className="w-5 h-5 text-purple-500 mt-0.5 shrink-0" />
                 <div className="text-sm">
                   <p className="text-zinc-400">Telemóvel Nacional</p>
                   <p className="text-white font-bold">+351 961 526 716</p>
                 </div>
               </li>
               <li className="flex items-start space-x-4">
-                <Phone className="w-5 h-5 text-purple-500 mt-1 shrink-0" />
+                <Phone className="w-5 h-5 text-purple-500 mt-0.5 shrink-0" />
                 <div className="text-sm">
                   <p className="text-zinc-400">Rede Fixa Nacional</p>
                   <p className="text-white font-bold">+351 232 373 044</p>
@@ -62,9 +62,9 @@ const Footer = () => {
 
           <div>
             <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-8">Localização</h4>
-            <ul className="space-y-4">
+            <ul className="space-y-6">
               <li className="flex items-start space-x-4">
-                <MapPin className="w-5 h-5 text-purple-500 mt-1 shrink-0" />
+                <MapPin className="w-5 h-5 text-purple-500 mt-0.5 shrink-0" />
                 <a
                   href="https://maps.google.com/?q=Rua+Padre+Am%C3%A9rico+3B+3600-132+Castro+Daire"
                   target="_blank"
@@ -76,10 +76,10 @@ const Footer = () => {
                   Castro Daire, Portugal
                 </a>
               </li>
-              <li className="flex items-start space-x-4">
-                <a href="mailto:hpinto@remax.pt" target="_blank" rel="noreferrer" className="flex items-start space-x-4 group">
-                  <Mail className="w-5 h-5 text-purple-500 mt-1 shrink-0 group-hover:text-purple-400 transition-colors" />
-                  <span className="text-white text-sm font-bold group-hover:text-purple-400 transition-colors mt-1">hpinto@remax.pt</span>
+              <li className="flex items-center space-x-4">
+                <Mail className="w-5 h-5 text-purple-500 shrink-0" />
+                <a href="mailto:hpinto@remax.pt" className="text-zinc-400 text-sm hover:text-purple-400 transition-colors">
+                  hpinto@remax.pt
                 </a>
               </li>
             </ul>

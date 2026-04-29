@@ -1,10 +1,8 @@
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Hero from './components/Hero';
-import ContactSection from './components/ContactSection';
 import Properties from './components/Properties';
-
+import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-
 function App() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -19,6 +17,7 @@ function App() {
         className="fixed top-0 left-0 right-0 h-1 bg-purple-600 origin-left z-50"
         style={{ scaleX }}
       />
+
 
       <main>
         <Hero />
