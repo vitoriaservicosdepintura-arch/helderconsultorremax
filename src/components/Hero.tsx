@@ -20,23 +20,20 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-screen overflow-hidden bg-black"
+      className="relative w-full h-[60svh] min-h-[400px] lg:h-screen overflow-hidden bg-[#09090b]"
     >
       {/* Parallax image layer */}
       <motion.div
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full flex items-center justify-center mt-8 lg:mt-0"
         style={{ y, scale, opacity }}
       >
         <img
           src="/Hero1.png"
-          alt="Helder Pinto - Consultor Imobiliário RE/MAX"
-          className="w-full h-full object-cover object-center"
-          style={{
-            objectPosition: 'center center',
-          }}
+          alt="Helder Pinto - Consultor Imobiliário"
+          className="w-full h-full object-contain lg:object-cover object-center px-4 lg:px-0"
         />
         {/* Bottom fade into next section */}
-        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#09090b] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-full h-32 lg:h-40 bg-gradient-to-t from-[#09090b] to-transparent pointer-events-none" />
       </motion.div>
 
       {/* Animated entrance: title overlay (mobile only hint) */}
