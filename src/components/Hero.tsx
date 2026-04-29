@@ -54,16 +54,16 @@ const Hero = () => {
           <img
             src="/helder1.png"
             alt="Helder Pinto"
-            className="w-full h-full object-contain lg:object-cover lg:object-[center_10%] contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
+            className="w-full h-full object-cover lg:object-cover lg:object-[center_10%] object-top contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
             style={{
               WebkitBackfaceVisibility: 'hidden',
               backfaceVisibility: 'hidden',
               transform: 'translateZ(0)'
             }}
           />
-          {/* Degradê de base unificado para o mobile */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 lg:via-black/20 to-transparent opacity-100 lg:opacity-90 z-20" />
-          <div className="absolute bottom-0 left-0 w-full h-[50%] lg:h-[30%] bg-gradient-to-t from-black to-transparent z-20" />
+          {/* Degradê de base planejado para não ter espaços vazios */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 lg:via-black/20 to-transparent opacity-100 lg:opacity-90 z-20" />
+          <div className="absolute bottom-0 left-0 w-full h-[60%] lg:h-[30%] bg-gradient-to-t from-black via-black to-transparent z-20" />
         </motion.div>
 
         {/* LOGOTIPO HÉLDER PINTO COM SOMBRA DE BASE (SOMBRA DE CONTATO) */}
@@ -86,8 +86,8 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* CAMADA 10: CONTEÚDO PREMIUM SOBREPOSTO NO MOBILE */}
-      <div className="relative w-full lg:w-[55%] h-full flex items-end lg:items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 pb-16 lg:py-20 z-30">
+      {/* CAMADA 10: CONTEÚDO PREMIUM - POSICIONAMENTO E BAIXO PARA NÃO COBRIR O ROSTO */}
+      <div className="relative w-full lg:w-[55%] h-full flex items-end lg:items-center justify-center lg:justify-start px-6 sm:px-12 lg:pl-20 pb-8 lg:py-20 z-30">
 
         {/* WATERMARK RE/MAX SUTIL AO FUNDO (VERSÃO AMPLIADA E DINÂMICA) */}
         <motion.div
@@ -113,9 +113,9 @@ const Hero = () => {
           transition={{ duration: 1.2, delay: 0.4 }}
           className="relative z-10 max-w-xl lg:max-w-2xl space-y-8"
         >
-          {/* HEADLINE (H1) - AJUSTADO PARA MOBILE ANDROID/IOS */}
-          <div className="space-y-4">
-            <h1 className="font-montserrat text-3xl sm:text-5xl lg:text-[4.5rem] font-extrabold leading-[1.1] lg:leading-[0.95] tracking-tight text-white italic lg:not-italic">
+          {/* HEADLINE (H1) - AJUSTADO PARA NÃO SOBREPOR O ROSTO NO MOBILE */}
+          <div className="space-y-2 lg:space-y-4">
+            <h1 className="font-montserrat text-3xl sm:text-5xl lg:text-[4.5rem] font-extrabold leading-[1.1] lg:leading-[0.95] tracking-tight text-white lg:not-italic drop-shadow-2xl">
               Excelência & <br />
               <span className="relative inline-block text-[#0055FF] animate-pulse-subtle">
                 Exclusividade
@@ -134,19 +134,19 @@ const Hero = () => {
             </h2>
           </div>
 
-          {/* TEXTO DE APOIO COM BARRA VERTICAL VERMELHA (#FF0000) À ESQUERDA */}
-          <div className="flex gap-8 items-stretch">
+          {/* TEXTO DE APOIO REDUZIDO NO MOBILE */}
+          <div className="flex gap-4 lg:gap-8 items-stretch mb-4 lg:mb-0">
             <div className="w-[3px] bg-[#FF0000] rounded-full flex-shrink-0" />
-            <p className="text-base sm:text-lg text-[#CCCCCC] font-normal leading-relaxed font-sans">
+            <p className="text-sm sm:text-lg text-[#CCCCCC] font-normal leading-relaxed font-sans line-clamp-3 lg:line-clamp-none">
               Descubra análises estratégicas, tendências do mercado imobiliário e oportunidades reservadas a investidores criteriosos. Mais do que informação — inteligência aplicada para decisões que elevam e preservam patrimônios.
             </p>
           </div>
 
-          {/* BOTÃO CTA PREMIUM VIBRANTE */}
+          {/* BOTÃO CTA PREMIUM VIBRANTE - AJUSTE DE MARGEM PARA CABER NA TELA */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="pt-6 w-full flex justify-center"
+            className="pt-2 lg:pt-6 w-full flex justify-center"
           >
             <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
