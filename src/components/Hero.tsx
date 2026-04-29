@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Smartphone } from 'lucide-react';
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -80,6 +81,24 @@ const Hero = () => {
           className="h-24 w-auto object-contain"
         />
       </div>
+
+
+      {/* Ícone de Rotação (Dica Visual Mobile Retrato) */}
+      <motion.div
+        className="lg:hidden absolute bottom-12 right-6 z-40 flex flex-col items-center gap-2 portrait:flex hidden landscape:hidden text-white/30"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2 }}
+      >
+        <motion.div
+          animate={{ rotate: [0, 90, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
+        >
+          <Smartphone size={28} strokeWidth={1.5} />
+        </motion.div>
+        <span className="text-[8px] uppercase tracking-[0.2em] font-black">Girar</span>
+      </motion.div>
+
 
       {/* Scroll indicator */}
       <motion.div
