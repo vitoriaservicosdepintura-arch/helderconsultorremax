@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Phone, Mail, User, Home, ArrowRight, MessageCircle, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import BorderGlow from './BorderGlow';
 
 // Instagram SVG (not available in lucide-react)
 const InstagramIcon = ({ className }: { className?: string }) => (
@@ -57,11 +58,24 @@ const FloatingSocialSidebar = () => {
                         aria-label={link.label}
                         whileHover={{ scale: 1.15, x: -4 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`relative w-12 h-12 bg-[#1e2436] border border-zinc-700 rounded-2xl flex items-center justify-center text-purple-400 transition-all duration-300 ${link.hoverClass} hover:text-white hover:border-transparent shadow-lg group`}
+                        className="relative group block shadow-lg rounded-2xl"
                     >
-                        <Icon className="w-5 h-5" />
+                        <BorderGlow
+                            edgeSensitivity={30}
+                            glowColor="40 80 80"
+                            backgroundColor="#120F17"
+                            borderRadius={16}
+                            glowRadius={40}
+                            glowIntensity={1}
+                            coneSpread={25}
+                            animated={false}
+                            colors={['#c084fc', '#f472b6', '#38bdf8']}
+                            className={`w-12 h-12 flex items-center justify-center text-purple-400 transition-all duration-300 ${link.hoverClass} hover:text-white`}
+                        >
+                            <Icon className="w-5 h-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        </BorderGlow>
                         {/* Label tooltip */}
-                        <span className="absolute right-14 whitespace-nowrap bg-[#1e2436] border border-zinc-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        <span className="absolute right-14 top-1/2 -translate-y-1/2 whitespace-nowrap bg-[#1e2436] border border-zinc-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                             {link.label}
                         </span>
                     </motion.a>
@@ -133,83 +147,95 @@ const ContactSection = () => {
                 {/* Form + Sidebar layout */}
                 <div className="relative flex justify-center w-full">
                     {/* Form Container */}
-                    <div className="bg-[#121829] border border-zinc-800 rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden w-full max-w-xl">
+                    <BorderGlow
+                        edgeSensitivity={30}
+                        glowColor="40 80 80"
+                        backgroundColor="#120F17"
+                        borderRadius={40}
+                        glowRadius={150}
+                        glowIntensity={1}
+                        coneSpread={25}
+                        animated={false}
+                        colors={['#c084fc', '#f472b6', '#38bdf8']}
+                        className="w-full max-w-xl shadow-2xl relative"
+                    >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-[60px] -z-10" />
-
-                        <div className="text-center mb-10">
-                            <h2 className="text-3xl font-black text-white flex items-center justify-center gap-2 mb-2">
-                                Fale comigo agora <span className="text-yellow-400">👇</span>
-                            </h2>
-                            <p className="text-zinc-400 font-medium">Preencha e entrarei em contacto em minutos.</p>
-                        </div>
-
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="relative group">
-                                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />
-                                <input
-                                    type="text"
-                                    placeholder="O seu nome completo"
-                                    required
-                                    value={formData.name}
-                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    className="w-full bg-[#1e2436] border border-transparent focus:border-blue-500/50 text-white pl-12 pr-4 py-4 rounded-2xl outline-none transition-all placeholder:text-zinc-500"
-                                />
+                        <div className="p-10 relative overflow-hidden h-full z-10 border border-zinc-800 rounded-[2.5rem]">
+                            <div className="text-center mb-10">
+                                <h2 className="text-3xl font-black text-white flex items-center justify-center gap-2 mb-2">
+                                    Fale comigo agora <span className="text-yellow-400">👇</span>
+                                </h2>
+                                <p className="text-zinc-400 font-medium">Preencha e entrarei em contacto em minutos.</p>
                             </div>
 
-                            <div className="relative group">
-                                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />
-                                <input
-                                    type="tel"
-                                    placeholder="O seu telemóvel"
-                                    required
-                                    value={formData.phone}
-                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                    className="w-full bg-[#1e2436] border border-transparent focus:border-blue-500/50 text-white pl-12 pr-4 py-4 rounded-2xl outline-none transition-all placeholder:text-zinc-500"
-                                />
-                            </div>
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <div className="relative group">
+                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />
+                                    <input
+                                        type="text"
+                                        placeholder="O seu nome completo"
+                                        required
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        className="w-full bg-[#1e2436] border border-transparent focus:border-blue-500/50 text-white pl-12 pr-4 py-4 rounded-2xl outline-none transition-all placeholder:text-zinc-500"
+                                    />
+                                </div>
 
-                            <div className="relative group">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />
-                                <input
-                                    type="email"
-                                    placeholder="O seu e-mail"
-                                    required
-                                    value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full bg-[#1e2436] border border-transparent focus:border-blue-500/50 text-white pl-12 pr-4 py-4 rounded-2xl outline-none transition-all placeholder:text-zinc-500"
-                                />
-                            </div>
+                                <div className="relative group">
+                                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />
+                                    <input
+                                        type="tel"
+                                        placeholder="O seu telemóvel"
+                                        required
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        className="w-full bg-[#1e2436] border border-transparent focus:border-blue-500/50 text-white pl-12 pr-4 py-4 rounded-2xl outline-none transition-all placeholder:text-zinc-500"
+                                    />
+                                </div>
 
-                            <div className="relative group">
-                                <Home className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 pointer-events-none" />
-                                <select
-                                    value={formData.interest}
-                                    onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                                    className="w-full bg-[#1e2436] border border-transparent focus:border-blue-500/50 text-white pl-12 pr-4 py-4 rounded-2xl outline-none transition-all appearance-none cursor-pointer"
+                                <div className="relative group">
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />
+                                    <input
+                                        type="email"
+                                        placeholder="O seu e-mail"
+                                        required
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        className="w-full bg-[#1e2436] border border-transparent focus:border-blue-500/50 text-white pl-12 pr-4 py-4 rounded-2xl outline-none transition-all placeholder:text-zinc-500"
+                                    />
+                                </div>
+
+                                <div className="relative group">
+                                    <Home className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 pointer-events-none" />
+                                    <select
+                                        value={formData.interest}
+                                        onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
+                                        className="w-full bg-[#1e2436] border border-transparent focus:border-blue-500/50 text-white pl-12 pr-4 py-4 rounded-2xl outline-none transition-all appearance-none cursor-pointer"
+                                    >
+                                        <option value="🏠 Quero comprar um imóvel">🏠 Quero comprar um imóvel</option>
+                                        <option value="🔑 Quero vender um imóvel">🔑 Quero vender um imóvel</option>
+                                        <option value="📈 Quero investir em imóveis">📈 Quero investir em imóveis</option>
+                                        <option value="ℹ️ Apenas informações">ℹ️ Apenas informações</option>
+                                    </select>
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500 text-sm">▼</div>
+                                </div>
+
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    type="submit"
+                                    className="w-full bg-[#00529b] hover:bg-[#00427c] text-white font-extrabold py-5 rounded-2xl text-lg flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(0,82,155,0.3)] uppercase tracking-wider mt-6"
                                 >
-                                    <option value="🏠 Quero comprar um imóvel">🏠 Quero comprar um imóvel</option>
-                                    <option value="🔑 Quero vender um imóvel">🔑 Quero vender um imóvel</option>
-                                    <option value="📈 Quero investir em imóveis">📈 Quero investir em imóveis</option>
-                                    <option value="ℹ️ Apenas informações">ℹ️ Apenas informações</option>
-                                </select>
-                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500 text-sm">▼</div>
+                                    QUERO SER CONTACTADO
+                                    <ArrowRight className="w-5 h-5" />
+                                </motion.button>
+                            </form>
+
+                            <div className="mt-6 text-center text-zinc-600 text-xs font-medium flex items-center justify-center gap-2">
+                                🔒 Dados 100% confidenciais e seguros.
                             </div>
-
-                            <motion.button
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                type="submit"
-                                className="w-full bg-[#00529b] hover:bg-[#00427c] text-white font-extrabold py-5 rounded-2xl text-lg flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(0,82,155,0.3)] uppercase tracking-wider mt-6"
-                            >
-                                QUERO SER CONTACTADO
-                                <ArrowRight className="w-5 h-5" />
-                            </motion.button>
-                        </form>
-
-                        <div className="mt-6 text-center text-zinc-600 text-xs font-medium flex items-center justify-center gap-2">
-                            🔒 Dados 100% confidenciais e seguros.
                         </div>
-                    </div>
+                    </BorderGlow>
 
                     {/* Floating Social Sidebar - Positioned Absolutely to keep form perfectly centered */}
                     <div className="absolute left-1/2 ml-[310px] top-1/2 -translate-y-1/2 hidden lg:block">
@@ -228,9 +254,22 @@ const ContactSection = () => {
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label={link.label}
-                                className={`w-12 h-12 bg-[#1e2436] border border-zinc-700 rounded-2xl flex items-center justify-center text-purple-400 transition-all duration-300 ${link.hoverClass} hover:text-white`}
+                                className="relative rounded-2xl block"
                             >
-                                <Icon className="w-5 h-5" />
+                                <BorderGlow
+                                    edgeSensitivity={30}
+                                    glowColor="40 80 80"
+                                    backgroundColor="#120F17"
+                                    borderRadius={16}
+                                    glowRadius={40}
+                                    glowIntensity={1}
+                                    coneSpread={25}
+                                    animated={false}
+                                    colors={['#c084fc', '#f472b6', '#38bdf8']}
+                                    className={`w-12 h-12 flex items-center justify-center text-purple-400 transition-all duration-300 ${link.hoverClass} hover:text-white`}
+                                >
+                                    <Icon className="w-5 h-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                                </BorderGlow>
                             </a>
                         );
                     })}
