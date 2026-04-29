@@ -1,124 +1,160 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Smartphone } from 'lucide-react';
 
 const Hero = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-
+  const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
+    target: containerRef,
+    offset: ["start start", "end start"]
   });
 
-  // Parallax: image moves up slightly and scales down as user scrolls
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const opacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, 0]);
+  // Efeitos de Parallax e Profundidade 3D (Premium 4K)
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const imageRotateX = useTransform(scrollYProgress, [0, 1], [0, -10]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-  // Scroll indicator bounces
-  const indicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const contentRotateX = useTransform(scrollYProgress, [0, 1], [0, 20]);
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+
+  const watermarkX = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const sectionSkew = useTransform(scrollYProgress, [0, 1], [0, 2]);
 
   return (
     <section
-      ref={sectionRef}
-      className="relative w-full h-screen overflow-hidden bg-black"
+      ref={containerRef}
+      className="relative w-full min-h-screen flex flex-col lg:flex-row items-center justify-between overflow-hidden bg-[#000000] [perspective:1500px]"
     >
-
-
-      {/* Parallax image layer */}
+      {/* COLUNA ESQUERDA - FOTO DE PERFIL (PROFISSIONAL & 4K) */}
       <motion.div
-        className="absolute inset-0 w-full h-full"
-        style={{ y, scale, opacity }}
+        style={{ skewY: sectionSkew }}
+        initial={{ opacity: 0, x: -50, scale: 0.95 }}
+        animate={{ opacity: 1, x: 0, scale: 1.0 }}
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+        className="relative w-full lg:w-[45%] h-[60vh] lg:h-screen z-20 flex flex-col justify-end overflow-hidden"
       >
-        <img
-          src="/Hero1.png"
-          alt="Helder Pinto - Consultor Imobiliário"
-          className="w-full h-full object-cover object-[75%_center] lg:object-center"
-        />
-        {/* Bottom fade into next section */}
-        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#09090b] to-transparent pointer-events-none" />
-      </motion.div>
-
-
-
-      {/* Animated entrance: title overlay (mobile only hint) */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, delay: 0.3 }}
-        className="absolute inset-0 flex flex-col items-center justify-end pb-12 pointer-events-none"
-      >
-      </motion.div>
-
-      {/* Nome Mobile - Centralizado no Meio (Apenas Retrato) */}
-      <div className="lg:hidden absolute inset-0 flex items-center justify-center z-25 pointer-events-none px-6 text-center hidden portrait:flex landscape:hidden">
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.4 }}
-          className="text-7xl font-['Caveat'] text-white drop-shadow-[0_0_8px_rgba(0,61,165,0.8)] mt-[-2vh]"
+        <motion.div
+          style={{
+            y: imageY,
+            rotateX: imageRotateX,
+            scale: imageScale,
+            transformStyle: 'preserve-3d'
+          }}
+          className="absolute inset-0 w-full h-full"
         >
-          Helder Pinto
-        </motion.h1>
-      </div>
+          <img
+            src="/helder1.png"
+            alt="Helder Pinto"
+            className="w-full h-full object-cover lg:object-[center_10%] contrast-[1.05] brightness-[1.05] saturate-[1.02] origin-top pointer-events-none"
+            style={{
+              WebkitBackfaceVisibility: 'hidden',
+              backfaceVisibility: 'hidden',
+              transform: 'translateZ(0)'
+            }}
+          />
+          {/* Degradê de base reforçado para "aterrar" a imagem e a logo */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100 z-20" />
+          <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-black to-transparent z-20" />
+        </motion.div>
 
-
-      {/* Logotipos Mobile - Apenas em modo Retrato */}
-      <div className="lg:hidden absolute bottom-20 left-0 w-full flex-col items-center justify-center gap-6 z-30 pointer-events-none hidden portrait:flex landscape:hidden">
-        <motion.img
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          src="/logo.png"
-          alt="Helder Pinto Logo"
-          className="h-44 w-auto object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-        />
-        <motion.img
-          initial={{ opacity: 0, y: 10 }}
+        {/* LOGOTIPO HÉLDER PINTO COM SOMBRA DE BASE (SOMBRA DE CONTATO) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          src="/LOGO3-sem-fundo.png"
-          alt="RE/MAX Balloon"
-          className="h-24 w-auto object-contain"
-        />
+          transition={{ duration: 1, delay: 1.2 }}
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 w-full flex justify-center pointer-events-none"
+        >
+          <div className="relative group flex justify-center w-full">
+            {/* SOMBRA ESFUMAÇADA ESPECÍFICA PARA A LOGO */}
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[80%] h-12 bg-black/60 blur-[30px] rounded-full z-0" />
+
+            <img
+              src="/logo.png"
+              alt="Hélder Pinto"
+              className="relative z-10 w-full max-w-[280px] lg:max-w-[380px] h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,1)]"
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* COLUNA DIREITA - CONTEÚDO PREMIUM E CTA */}
+      <div className="relative w-full lg:w-[55%] min-h-screen flex items-center justify-center lg:justify-start px-8 sm:px-12 lg:pl-20 py-20 z-10">
+
+        {/* WATERMARK RE/MAX SUTIL AO FUNDO (VERSÃO AMPLIADA E DINÂMICA) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.08 }}
+          transition={{ duration: 2 }}
+          style={{ rotate: 15, x: watermarkX }}
+          className="absolute top-1/2 -right-20 lg:-right-40 -translate-y-1/2 w-[100%] lg:w-[120%] h-auto pointer-events-none z-0"
+        >
+          <img src="/LOGO3-sem-fundo.png" alt="" className="w-full h-auto grayscale invert" />
+        </motion.div>
+
+        <motion.div
+          style={{
+            y: contentY,
+            rotateX: contentRotateX,
+            scale: contentScale,
+            opacity: contentOpacity,
+            transformStyle: 'preserve-3d'
+          }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.4 }}
+          className="relative z-10 max-w-xl lg:max-w-2xl space-y-8"
+        >
+          {/* HEADLINE (H1) - MONTSERRAT EXTRABOLD */}
+          <div className="space-y-4">
+            <h1 className="font-montserrat text-4xl sm:text-6xl lg:text-[4.5rem] font-extrabold leading-[0.95] tracking-tight text-white">
+              Excelência & <br />
+              <span className="relative inline-block text-[#0055FF] animate-pulse-subtle">
+                Exclusividade
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 1.5, delay: 1.5 }}
+                  className="absolute -bottom-1 lg:-bottom-2 left-0 h-[2px] lg:h-[3px] bg-[#0055FF]"
+                />
+              </span>
+            </h1>
+
+            {/* SUBTÍTULO (H2) */}
+            <h2 className="text-lg sm:text-xl font-medium text-white leading-relaxed font-sans max-w-[90%]">
+              Acesso privilegiado aos imóveis mais exclusivos do mercado, para quem procura privacidade e distinção.
+            </h2>
+          </div>
+
+          {/* TEXTO DE APOIO COM BARRA VERTICAL VERMELHA (#FF0000) À ESQUERDA */}
+          <div className="flex gap-8 items-stretch">
+            <div className="w-[3px] bg-[#FF0000] rounded-full flex-shrink-0" />
+            <p className="text-base sm:text-lg text-[#CCCCCC] font-normal leading-relaxed font-sans">
+              Descubra análises estratégicas, tendências do mercado imobiliário e oportunidades reservadas a investidores criteriosos. Mais do que informação — inteligência aplicada para decisões que elevam e preservam patrimônios.
+            </p>
+          </div>
+
+          {/* BOTÃO CTA PREMIUM VIBRANTE */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="pt-6 w-full flex justify-center"
+          >
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group relative px-14 py-5 bg-[#0055FF] text-white font-bold uppercase tracking-[3px] text-xs lg:text-sm rounded-[10px] shadow-[0_15px_30px_rgba(0,85,255,0.4)] hover:shadow-[0_20px_50px_rgba(0,85,255,0.7)] transition-all duration-300 overflow-hidden"
+            >
+              <span className="relative z-10">CONSULTAR OPORTUNIDADES</span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </button>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Ícone de Rotação (Dica Visual Mobile Retrato) */}
-      <motion.div
-        className="lg:hidden absolute bottom-12 right-6 z-40 flex flex-col items-center gap-2 portrait:flex hidden landscape:hidden text-white/30"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-      >
-        <motion.div
-          animate={{ rotate: [0, 90, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
-        >
-          <Smartphone size={28} strokeWidth={1.5} />
-        </motion.div>
-        <span className="text-[8px] uppercase tracking-[0.2em] font-black">Rodar</span>
-      </motion.div>
-
-
-      {/* Scroll indicator */}
-      <motion.div
-        style={{ opacity: indicatorOpacity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
-      >
-        <span className="text-white/50 text-xs uppercase tracking-widest font-semibold">
-          Descubra
-        </span>
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.4, ease: 'easeInOut' }}
-          className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center pt-2"
-        >
-          <div className="w-1 h-2 rounded-full bg-brand" />
-        </motion.div>
-      </motion.div>
+      {/* GRADIENTE DE AMBIENTE PARA PROFUNDIDADE */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#0033aa]/10 to-transparent pointer-events-none z-0" />
     </section>
   );
 };
 
 export default Hero;
-
