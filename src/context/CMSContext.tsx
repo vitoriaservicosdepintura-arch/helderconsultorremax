@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 
 export interface Property {
@@ -37,7 +37,8 @@ export interface CMSData {
     };
 }
 
-const initialData: CMSData = {
+// Dados padrão — usados apenas se o banco estiver vazio
+export const initialData: CMSData = {
     hero: {
         title: "Excelência & Exclusividade",
         subtitle: "Acesso privilegiado aos imóveis mais exclusivos do mercado, para quem procura privacidade e distinção.",
@@ -115,7 +116,7 @@ const initialData: CMSData = {
 
 interface CMSContextType {
     data: CMSData;
-    updateData: (newData: CMSData) => void;
+    updateData: (newData: CMSData) => Promise<{ success: boolean; error?: string }>;
     isAdmin: boolean;
     setIsAdmin: (val: boolean) => void;
     isLoading: boolean;
@@ -123,35 +124,46 @@ interface CMSContextType {
 
 const CMSContext = createContext<CMSContextType | undefined>(undefined);
 
+const SUPABASE_ROW_ID = 'main';
+
 export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [data, setData] = useState<CMSData>(initialData);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Carregar dados do Supabase ao iniciar
+    // ── Carrega os dados do Supabase ao montar ──
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: dbData, error } = await supabase
+                const { data: row, error } = await supabase
                     .from('helder_cms')
                     .select('data')
-                    .eq('id', 'main')
+                    .eq('id', SUPABASE_ROW_ID)
                     .single();
 
-                if (dbData && !error) {
-                    const loaded: CMSData = dbData.data;
-                    // Se o banco não tem imóveis, usa initialData
+                if (row && !error) {
+                    const loaded: CMSData = row.data;
+                    // Fallback: se o banco não tiver imóveis, preenche com os padrão
                     if (!loaded.properties || loaded.properties.length === 0) {
                         loaded.properties = initialData.properties;
-                        await supabase.from('helder_cms').update({ data: loaded }).eq('id', 'main');
+                        await supabase
+                            .from('helder_cms')
+                            .update({ data: loaded })
+                            .eq('id', SUPABASE_ROW_ID);
                     }
                     setData(loaded);
                 } else {
-                    // Linha não existe — cria com initialData
-                    await supabase.from('helder_cms').upsert([{ id: 'main', data: initialData }]);
+                    // Linha não existe — cria agora com os dados iniciais
+                    console.warn('Linha CMS não encontrada, criando...');
+                    await supabase
+                        .from('helder_cms')
+                        .upsert([{ id: SUPABASE_ROW_ID, data: initialData }]);
+                    setData(initialData);
                 }
             } catch (err) {
-                console.error("Erro ao carregar CMS:", err);
+                console.error("Erro ao carregar CMS do Supabase:", err);
+                // Se falhar, usa os dados padrão do código
+                setData(initialData);
             } finally {
                 setIsLoading(false);
             }
@@ -160,21 +172,29 @@ export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         fetchData();
     }, []);
 
-    const updateData = async (newData: CMSData) => {
+    // ── Salva as alterações no Supabase e atualiza o estado local ──
+    const updateData = useCallback(async (newData: CMSData): Promise<{ success: boolean; error?: string }> => {
+        // Atualiza imediatamente o estado local (UI reativa)
         setData(newData);
+
         try {
             const { error } = await supabase
                 .from('helder_cms')
                 .update({ data: newData })
-                .eq('id', 'main');
+                .eq('id', SUPABASE_ROW_ID);
 
-            if (error) throw error;
-        } catch (err) {
-            console.error("Erro ao salvar no banco:", err);
-            // Fallback para localStorage em caso de erro no banco
-            localStorage.setItem('helder-pinto-cms-data', JSON.stringify(newData));
+            if (error) {
+                console.error("Supabase update error:", error);
+                return { success: false, error: error.message };
+            }
+
+            console.log('✅ Dados salvos no Supabase com sucesso!');
+            return { success: true };
+        } catch (err: any) {
+            console.error("Erro inesperado ao salvar:", err);
+            return { success: false, error: err?.message || 'Erro desconhecido' };
         }
-    };
+    }, []);
 
     return (
         <CMSContext.Provider value={{ data, updateData, isAdmin, setIsAdmin, isLoading }}>
@@ -184,9 +204,7 @@ export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 };
 
 export const useCMS = () => {
-    const context = useContext(CMSContext);
-    if (!context) {
-        throw new Error('useCMS must be used within a CMSProvider');
-    }
-    return context;
+    const ctx = useContext(CMSContext);
+    if (!ctx) throw new Error('useCMS must be used within a CMSProvider');
+    return ctx;
 };

@@ -4,7 +4,8 @@ import { supabase } from '../lib/supabase';
 import {
     X, Layout, Briefcase, Phone,
     Save, Trash2, Plus, LogOut, Upload, Lock, Users,
-    RefreshCw, Mail, PhoneCall, Calendar, Tag, Menu, ChevronDown
+    RefreshCw, Mail, PhoneCall, Calendar, Tag, Menu, ChevronDown,
+    CheckCircle, AlertCircle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -25,6 +26,7 @@ const AdminPanel: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'hero' | 'portfolio' | 'footer' | 'leads'>('hero');
     const [tempData, setTempData] = useState<CMSData>(data);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
 
     const [leads, setLeads] = useState<Lead[]>([]);
     const [leadsLoading, setLeadsLoading] = useState(false);
@@ -58,9 +60,16 @@ const AdminPanel: React.FC = () => {
         }
     };
 
-    const handleSave = () => {
-        updateData(tempData);
-        alert('Alterações salvas com sucesso!');
+    const handleSave = async () => {
+        setSaveStatus('saving');
+        const result = await updateData(tempData);
+        if (result.success) {
+            setSaveStatus('success');
+            setTimeout(() => setSaveStatus('idle'), 3000);
+        } else {
+            setSaveStatus('error');
+            setTimeout(() => setSaveStatus('idle'), 4000);
+        }
     };
 
     const handlePropertyChange = (index: number, field: keyof Property, value: any) => {
@@ -194,11 +203,21 @@ const AdminPanel: React.FC = () => {
 
                 <div className="flex items-center gap-2">
                     {activeTab !== 'leads' ? (
-                        <button onClick={handleSave}
-                            className="px-4 py-2 bg-brand hover:bg-brand-light text-white rounded-xl font-black text-[10px] uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg shadow-brand/20 active:scale-95"
+                        <button
+                            onClick={handleSave}
+                            disabled={saveStatus === 'saving'}
+                            className={`px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed ${saveStatus === 'success' ? 'bg-green-600 shadow-green-900/30'
+                                    : saveStatus === 'error' ? 'bg-red-600 shadow-red-900/30'
+                                        : 'bg-brand hover:bg-brand-light shadow-brand/20'
+                                } text-white`}
                         >
-                            <Save className="w-3.5 h-3.5" />
-                            <span className="hidden sm:inline">Salvar</span>
+                            {saveStatus === 'saving' && <RefreshCw className="w-3.5 h-3.5 animate-spin" />}
+                            {saveStatus === 'success' && <CheckCircle className="w-3.5 h-3.5" />}
+                            {saveStatus === 'error' && <AlertCircle className="w-3.5 h-3.5" />}
+                            {saveStatus === 'idle' && <Save className="w-3.5 h-3.5" />}
+                            <span className="hidden sm:inline">
+                                {saveStatus === 'saving' ? 'A salvar...' : saveStatus === 'success' ? 'Salvo!' : saveStatus === 'error' ? 'Erro!' : 'Salvar'}
+                            </span>
                         </button>
                     ) : (
                         <button onClick={fetchLeads} disabled={leadsLoading}
@@ -207,6 +226,7 @@ const AdminPanel: React.FC = () => {
                             <RefreshCw className={`w-3.5 h-3.5 ${leadsLoading ? 'animate-spin' : ''}`} />
                         </button>
                     )}
+
                     <button onClick={() => setIsAdmin(false)}
                         className="p-2 bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-white rounded-xl transition-all"
                     >
@@ -415,8 +435,8 @@ const SidebarContent = ({ menuItems, activeTab, onTabChange, onLogout }: {
                     key={item.id}
                     onClick={() => onTabChange(item.id)}
                     className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl transition-all ${activeTab === item.id
-                            ? 'bg-brand text-white shadow-lg shadow-brand/30'
-                            : 'text-zinc-500 hover:bg-zinc-800 hover:text-white'
+                        ? 'bg-brand text-white shadow-lg shadow-brand/30'
+                        : 'text-zinc-500 hover:bg-zinc-800 hover:text-white'
                         }`}
                 >
                     <item.icon className="w-4 h-4 flex-shrink-0" />
