@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 
 export interface Property {
     id: number;
@@ -117,33 +118,66 @@ interface CMSContextType {
     updateData: (newData: CMSData) => void;
     isAdmin: boolean;
     setIsAdmin: (val: boolean) => void;
+    isLoading: boolean;
 }
 
 const CMSContext = createContext<CMSContextType | undefined>(undefined);
 
 export const CMSProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [data, setData] = useState<CMSData>(() => {
-        const saved = localStorage.getItem('helder-pinto-cms-data');
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            // Remove menus if it exists in saved data to keep it clean
-            if (parsed.menus) delete parsed.menus;
-            return parsed;
-        }
-        return initialData;
-    });
+    const [data, setData] = useState<CMSData>(initialData);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
+    // Carregar dados do Supabase ao iniciar
     useEffect(() => {
-        localStorage.setItem('helder-pinto-cms-data', JSON.stringify(data));
-    }, [data]);
+        const fetchData = async () => {
+            try {
+                const { data: dbData, error } = await supabase
+                    .from('helder_cms')
+                    .select('data')
+                    .eq('id', 'main')
+                    .single();
 
-    const updateData = (newData: CMSData) => {
+                if (dbData && !error) {
+                    const loaded: CMSData = dbData.data;
+                    // Se o banco não tem imóveis, usa initialData
+                    if (!loaded.properties || loaded.properties.length === 0) {
+                        loaded.properties = initialData.properties;
+                        await supabase.from('helder_cms').update({ data: loaded }).eq('id', 'main');
+                    }
+                    setData(loaded);
+                } else {
+                    // Linha não existe — cria com initialData
+                    await supabase.from('helder_cms').upsert([{ id: 'main', data: initialData }]);
+                }
+            } catch (err) {
+                console.error("Erro ao carregar CMS:", err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const updateData = async (newData: CMSData) => {
         setData(newData);
+        try {
+            const { error } = await supabase
+                .from('helder_cms')
+                .update({ data: newData })
+                .eq('id', 'main');
+
+            if (error) throw error;
+        } catch (err) {
+            console.error("Erro ao salvar no banco:", err);
+            // Fallback para localStorage em caso de erro no banco
+            localStorage.setItem('helder-pinto-cms-data', JSON.stringify(newData));
+        }
     };
 
     return (
-        <CMSContext.Provider value={{ data, updateData, isAdmin, setIsAdmin }}>
+        <CMSContext.Provider value={{ data, updateData, isAdmin, setIsAdmin, isLoading }}>
             {children}
         </CMSContext.Provider>
     );

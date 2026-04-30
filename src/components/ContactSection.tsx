@@ -3,6 +3,7 @@ import { Phone, Mail, User, Home, ArrowRight, MessageCircle, Globe } from 'lucid
 import { motion } from 'framer-motion';
 import BorderGlow from './BorderGlow';
 import { useCMS } from '../context/CMSContext';
+import { supabase } from '../lib/supabase';
 
 const InstagramIcon = ({ className }: { className?: string }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -84,9 +85,27 @@ const ContactSection = () => {
         window.location.href = `tel:${data.footer.phone}`;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const interestLabel = interestOptions[formData.interest];
+
+        // 1. Salvar no Banco de Dados (Supabase)
+        try {
+            const { error } = await supabase.from('helder_leads').insert([
+                {
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    interest: interestLabel
+                }
+            ]);
+            if (error) throw error;
+            console.log("Lead salvo com sucesso no banco!");
+        } catch (err) {
+            console.error("Erro ao salvar lead:", err);
+        }
+
+        // 2. Abrir WhatsApp (Comportamento original)
         const message = encodeURIComponent(
             `Olá Helder! 👋\n\n` +
             `Gostaria de ser contactado. Seguem os meus dados:\n` +
@@ -96,6 +115,10 @@ const ContactSection = () => {
             `🏠 *Interesse:* ${interestLabel}`
         );
         window.open(`${data.footer.socials.whatsapp}?text=${message}`, '_blank');
+
+        // Limpar form
+        setFormData({ name: '', phone: '', email: '', interest: 'buy' });
+        alert('Mensagem enviada! Dados registados com sucesso.');
     };
 
     return (
