@@ -104,10 +104,10 @@ const Footer = () => {
             <a href="#" className="hover:text-brand transition-colors">Termos</a>
             <button
               onClick={() => setIsAdmin(true)}
-              className="opacity-10 hover:opacity-50 transition-opacity cursor-pointer p-1"
-              aria-label="Admin Panel"
+              className="group flex items-center gap-1.5 opacity-30 hover:opacity-100 transition-all cursor-pointer"
             >
-              <Settings className="w-3 h-3 text-zinc-600" />
+              <Settings className="w-3 h-3 text-brand group-hover:rotate-90 transition-transform duration-500" />
+              <span className="text-[9px] text-zinc-500 group-hover:text-white uppercase tracking-widest hidden sm:block">Admin</span>
             </button>
           </div>
         </div>
