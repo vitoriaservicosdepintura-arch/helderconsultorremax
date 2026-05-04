@@ -157,11 +157,11 @@ const AdminPanel: React.FC = () => {
                 >
                     <div className="absolute top-0 left-0 right-0 h-1 bg-brand" />
                     <div className="text-center mb-8">
-                        <div className="w-14 h-14 bg-brand/10 border border-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                            <Lock className="w-7 h-7 text-brand" />
+                        <div className="w-16 h-16 bg-gradient-to-br from-brand/20 to-brand/5 border border-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-brand/20">
+                            <Lock className="w-8 h-8 text-brand" />
                         </div>
-                        <h2 className="text-xl font-black uppercase italic tracking-tighter text-white">Acesso Restrito</h2>
-                        <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mt-1">Admin Panel</p>
+                        <h2 className="text-2xl font-black uppercase italic tracking-tighter text-white">Painel de Controlo</h2>
+                        <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mt-1">Acesso Restrito · Helder Pinto</p>
                     </div>
 
                     <form onSubmit={handleLogin} className="space-y-4">
