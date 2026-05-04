@@ -19,7 +19,7 @@ interface Lead {
 }
 
 const AdminPanel: React.FC = () => {
-    const { data, updateData, setIsAdmin } = useCMS();
+    const { data, updateData, setIsAdmin, isLoading } = useCMS();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loginData, setLoginData] = useState({ user: '', pass: '' });
     const [error, setError] = useState('');
@@ -27,6 +27,13 @@ const AdminPanel: React.FC = () => {
     const [tempData, setTempData] = useState<CMSData>(data);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
+
+    // ── SINCRONIZAÇÃO: Garante que tempData use os dados reais após o fetch do Supabase ──
+    useEffect(() => {
+        if (!isLoading) {
+            setTempData(data);
+        }
+    }, [data, isLoading]);
 
     const [leads, setLeads] = useState<Lead[]>([]);
     const [leadsLoading, setLeadsLoading] = useState(false);
@@ -102,6 +109,21 @@ const AdminPanel: React.FC = () => {
         }
     };
 
+    const removeLead = async (id: number) => {
+        if (confirm('Excluir este lead permanentemente?')) {
+            try {
+                const { error } = await supabase.from('helder_leads').delete().eq('id', id);
+                if (!error) {
+                    setLeads(leads.filter(l => l.id !== id));
+                } else {
+                    alert('Erro ao excluir lead: ' + error.message);
+                }
+            } catch (err) {
+                console.error('Erro ao excluir lead:', err);
+            }
+        }
+    };
+
     const menuItems = [
         { id: 'hero', label: 'Seção Hero', icon: Layout },
         { id: 'portfolio', label: 'Portfólio', icon: Briefcase },
@@ -113,6 +135,16 @@ const AdminPanel: React.FC = () => {
         setActiveTab(tabId as any);
         setSidebarOpen(false);
     };
+
+    // ---- LOADING SCREEN ----
+    if (isLoading) {
+        return (
+            <div className="fixed inset-0 z-[110] bg-zinc-950 flex flex-col items-center justify-center p-4">
+                <div className="w-12 h-12 border-4 border-brand border-t-transparent rounded-full animate-spin mb-4" />
+                <p className="text-zinc-500 font-bold uppercase tracking-widest text-[10px]">A carregar dados do CMS...</p>
+            </div>
+        );
+    }
 
     // ---- LOGIN SCREEN ----
     if (!isAuthenticated) {
@@ -207,8 +239,8 @@ const AdminPanel: React.FC = () => {
                             onClick={handleSave}
                             disabled={saveStatus === 'saving'}
                             className={`px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed ${saveStatus === 'success' ? 'bg-green-600 shadow-green-900/30'
-                                    : saveStatus === 'error' ? 'bg-red-600 shadow-red-900/30'
-                                        : 'bg-brand hover:bg-brand-light shadow-brand/20'
+                                : saveStatus === 'error' ? 'bg-red-600 shadow-red-900/30'
+                                    : 'bg-brand hover:bg-brand-light shadow-brand/20'
                                 } text-white`}
                         >
                             {saveStatus === 'saving' && <RefreshCw className="w-3.5 h-3.5 animate-spin" />}
@@ -379,6 +411,9 @@ const AdminPanel: React.FC = () => {
                                                             {new Date(lead.created_at).toLocaleDateString('pt-PT', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })}
                                                         </p>
                                                     </div>
+                                                    <button onClick={() => removeLead(lead.id)} className="p-2 text-zinc-600 hover:text-red-400 transition-colors">
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
                                                 </div>
                                                 {/* Lead details grid */}
                                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
